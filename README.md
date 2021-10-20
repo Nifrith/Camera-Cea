@@ -7,7 +7,7 @@ Se solicita realizar la instancia de prefabs que representen balas mediante un g
 Se creo un entorno y se utilizaron assets de unity store para el cañon, el fondo y el color de las balas :D
 
 Las balas exponen 3 variables: 
-```cs
+```c
 // Public variables from here
     public float damage;
     public float bulletSpeed;
@@ -18,7 +18,7 @@ Las balas exponen 3 variables:
 ```
 
 Se utiliza el metodo InvokeRepeating: 
-```cs
+```c
  // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +27,7 @@ Se utiliza el metodo InvokeRepeating:
 
 ```
 Y un método para hacer la llamada a el o los prefabs: 
-```cs
+```c
  void Cannon()
     {
         int bulletInstance = Random.Range(0, bulletPrefab.Length);
