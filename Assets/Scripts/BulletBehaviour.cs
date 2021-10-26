@@ -56,8 +56,8 @@ public class BulletBehaviour : MonoBehaviour
         }
 
         // destruir el proyectil si el impulso de la bala es 0
-        
-        
+
+        BulletGrow();
 
     }
 
@@ -86,6 +86,19 @@ public class BulletBehaviour : MonoBehaviour
     }
 
     // método para destruir la bala al llegar a determinado punto
-    
+    void BulletGrow()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            float scaleX = transform.localScale.x * 2;
+            float scaleY = transform.localScale.y * 2;
+            float scaleZ = transform.localScale.z * 2;
+
+            transform.localScale = new Vector3(scaleX, scaleY, scaleZ);
+            Debug.Log(transform.localScale);
+
+
+        }
+    }    
 
 }
