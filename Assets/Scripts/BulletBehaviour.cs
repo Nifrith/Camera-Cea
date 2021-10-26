@@ -8,63 +8,81 @@ public class BulletBehaviour : MonoBehaviour
     // Public variables from here
     public float damage;
     public float bulletSpeed;
+    public float impulse;
 
     // Direction should be: right, left, up , down , forward, back
-    public string direction;
+    public Direction direction;
     
-
 
     // Start is called before the first frame update
     void Start()
     {
        
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(gameObject.transform.localPosition.x <= 4f || gameObject.transform.localPosition.y <= 4f || gameObject.transform.localPosition.z <= 4f)
+        switch (direction)
         {
-            if (direction.Equals("right"))
-            {
+            case Direction.right:
                 MoveBullet(Vector3.right);
-            }
-            if (direction.Equals("left"))
-            {
+                break;
+            case Direction.left:
                 MoveBullet(Vector3.left);
-            }
-            if (direction.Equals("up"))
-            {
+                break;
+            case Direction.up:
                 MoveBullet(Vector3.up);
-            }
-            if (direction.Equals("down"))
-            {
+                break;
+            case Direction.down:
                 MoveBullet(Vector3.down);
-            }
-            if (direction.Equals("forward"))
-            {
+                break;
+            case Direction.forward:
                 MoveBullet(Vector3.forward);
-            }
-            if (direction.Equals("back"))
-            {
+                break;
+            case Direction.back:
                 MoveBullet(Vector3.back);
-            }
+                break;
+        }
+
+        if (impulse > 0f)
+        {
+           impulse -= Time.deltaTime;
+           Debug.Log(impulse);
         } else
         {
             DestroyBullet();
         }
+
+        // destruir el proyectil si el impulso de la bala es 0
         
+        
+
     }
 
+    // Método para mover la bala
     private void MoveBullet(Vector3 vector3)
     {
        transform.Translate(bulletSpeed * Time.deltaTime * vector3);
+
     }
 
+    // Método para destruir la bala en caso de que el impulso llegue a 0
     private void DestroyBullet()
     {
-        Destroy(gameObject);
+            Destroy(gameObject);
+           
+    }
+
+    public enum Direction
+    {
+        up,
+        down,
+        left,
+        right,
+        forward,
+        back
     }
 
     // método para destruir la bala al llegar a determinado punto
