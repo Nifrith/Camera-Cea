@@ -6,12 +6,12 @@ public class BulletBehaviour : MonoBehaviour
 {
 
     // Public variables from here
-    public float damage;
-    public float bulletSpeed;
-    public float impulse;
+    [SerializeField] float damage;
+    [SerializeField] float bulletSpeed;
+    [SerializeField] float impulse;
 
     // Direction should be: right, left, up , down , forward, back
-    public Direction direction;
+    [SerializeField] Direction direction;
     
 
     // Start is called before the first frame update

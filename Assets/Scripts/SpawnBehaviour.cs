@@ -5,13 +5,14 @@ using UnityEngine;
 public class SpawnBehaviour : MonoBehaviour
 {
     // public variables here
-    public GameObject[] bulletPrefab;
-    public float distanceBeforeDestroyed;
+    [SerializeField] GameObject[] bulletPrefab;
+    [SerializeField] float spawnDelay;
+    [SerializeField] float spawnInterval;
 
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("Cannon", 2f, 1.5f);
+        InvokeRepeating("Cannon", spawnInterval, spawnDelay);
     }
 
     // Update is called once per frame
