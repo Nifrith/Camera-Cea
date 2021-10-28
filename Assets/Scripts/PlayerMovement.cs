@@ -7,8 +7,8 @@ public class PlayerMovement : MonoBehaviour
     Vector3 position; // Vector para el direccionamiento del personaje
     public float speed = 10; // velocidad de movimiento del personaje
     public int life = 50; // vida del personaje
-    public int maxLife = 100; // vida m醲ima del personaje
-    public string direction = ""; // direcci髇 hacia la cual se mueve el personaje
+    public int maxLife = 100; // vida m谩xima del personaje
+    private string direction = ""; // direcci贸n hacia la cual se mueve el personaje
 
     // Start is called before the first frame update
     void Start()
@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
             float x = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
             position.x += x;
             transform.localPosition = position;
-            // llamar al m閠odo de direcci髇
+            // llamar al m茅todo de direcci贸n
             SetDirection(x, true);
         }
 
@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    // L骻ica para establecer direcci髇 del objeto
+    // L贸gica para establecer direcci贸n del objeto
     void SetDirection(float dirValue, bool isX)
     {
         if (isX)
@@ -89,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    // L骻ica para curaci髇
+    // L贸gica para curaci贸n
     void Heal(int healing)
     {
         if ((healing + life) > maxLife)
@@ -105,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("healed, life now is: " + life);
     }
 
-    // L骻ica para recibir da駉
+    // L贸gica para recibir da帽o
     void TakeDamage(int damage)
     {
         if (damage > life)

@@ -1,63 +1,62 @@
-# Disparos - Desafío 4 unity
+# Disparos - Desafío 5 unity
 
-Se solicita realizar la instancia de prefabs que representen balas mediante un generador, simulando un cañon, se deben destruir las balas bajo determinadas condiciones
+Se solicita realizar la creación de múltiples cámaras que sigan a un gameobject controlado por inputs o que tengan
+una vista fija (deben ser al menos 2)
 
 ## Información adicional
 
-Se creo un entorno y se utilizaron assets de unity store para el cañon, el fondo y el color de las balas :D
+Se creo un entorno y se utilizaron assets de unity store para el cañon, el fondo, el mar. Se agregó también un prefab de
+barco pirata (considerando el cañon y las balas, ya son 3 assets importados).
 
-Las balas exponen 3 variables y una estructura llamada direction, que hace una llamada a los Enum de dirección: 
+En cuanto a las texturas, ya se contaban con diversas texturas previamente, tanto para el cielo como para el terreno, pero se añadió
+además una textura de agua donde fue posicionado el barco pirata para coherencia del plano
+
+Se añadieron, a cada una de las cámaras, un audio source para que se reproduzcan los sonidos importados, al activar una cámara X
+
+## Con respecto a la entrega anterior, los cambios principales son: 
+
+Se añadieron 3 cámaras para diferentes vistas de la escena:
 ```c
-// Public variables from here
-    [SerializeField] float damage;
-    [SerializeField] float bulletSpeed;
-    [SerializeField] float impulse;
-
-// Direction should be: right, left, up , down , forward, back
-    [SerializeField] Direction direction;
-
+Main camera = Cinemachine con una perspectiva de 3ra persona y seguimiento del cañon
+Topdowncamera = camara mirando el plano enfocando el cañon, el mar y el barco pirata
+Thirdcamera = camara mirando al cañon de frente, volteando la vista
 ```
 
-Se utiliza el metodo InvokeRepeating, se actualizó el código serializando todas las variables: 
+Se creo un script para el control de cámaras utilizando un arreglo, actualmente
+solo se usan 3:
 
 ```c
-    [SerializeField] GameObject[] bulletPrefab;
-    [SerializeField] float spawnDelay;
-    [SerializeField] float spawnInterval;
-    
-// Start is called before the first frame update
-    void Start()
-    {
-        InvokeRepeating("Cannon", spawnInterval, spawnDelay);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-               
-    }
-
-    void Cannon()
-    {
-        int bulletInstance = Random.Range(0, bulletPrefab.Length);
-        Instantiate(bulletPrefab[bulletInstance], transform.position, bulletPrefab[bulletInstance].transform.rotation);
-    }
-
-```
-
-Se añadio la lógica de aumento de escala al presionar la tecla espacio:
-```c
-// método para destruir la bala al llegar a determinado punto
-    void BulletGrow()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
+     // activar o desactivar camaras
+        if (Input.GetKey(KeyCode.F1))
         {
-            transform.localScale = transform.localScale * 2f;
-            Debug.Log(transform.localScale);
-
+            if (!thirdpersonenabled)
+            {
+                cameras[0].SetActive(true);
+                cameras[1].SetActive(false);
+                cameras[2].SetActive(false);
+            }
         }
-    }  
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            if (!topdownenabled)
+            {
+                cameras[0].SetActive(false);
+                cameras[1].SetActive(true);
+                cameras[2].SetActive(false);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+            if (!topdownenabled)
+            {
+                cameras[0].SetActive(false);
+                cameras[1].SetActive(false);
+                cameras[2].SetActive(true);
+            }
+        }
 
 ```
+
+
 ## Authors
 Josue Cea - Samuel Cea
